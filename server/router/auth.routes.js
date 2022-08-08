@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const router = new Router();
+const authMiddleware = require('../middleware/auth.middleware')
 
 router.post(
   "/register",
@@ -40,7 +41,7 @@ router.post(
         .json({ message: `User ${user.email} has been registered` });
     } catch (err) {
       console.log(err);
-      return res.status(400).json({ message: "registration failed" });
+      return res.status(400).json({ message: "authorization failed" });
     }
   }
 );
@@ -96,5 +97,27 @@ router.post(
     }
   }
 );
+
+router.get('/auth', authMiddleware,
+    async (req, res) => {
+      try {
+        const user = await User.findOne({_id: req.user.id})
+        const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {expiresIn: process.env.EXPIRES_IN})
+        return res.json({
+          token,
+          user: {
+            id: user.id,
+            email: user.email,
+            diskSpace: user.diskSpace,
+            usedSpace: user.usedSpace,
+            avatar: user.avatar
+          }
+        })
+      } catch (e) {
+        console.log(e)
+        res.send({message: "Server error"})
+      }
+    })
+
 
 module.exports = router;
