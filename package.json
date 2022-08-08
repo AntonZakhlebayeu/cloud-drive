@@ -1,5 +1,26 @@
 {
   "dependencies": {
     "uuid": "^8.3.2"
-  }
+  },
+  "name": "cloud-drive",
+  "description": "Fullstack application was made with MERN stack.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "concurrently": "^7.3.0"
+  },
+  "scripts": {
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonZakhlebayeu/cloud-drive.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonZakhlebayeu/cloud-drive/issues"
+  },
+  "homepage": "https://github.com/AntonZakhlebayeu/cloud-drive#readme"
 }
