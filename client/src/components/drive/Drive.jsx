@@ -3,18 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFiles, uploadFile } from "../../actions/file";
 import FileList from "./fileList/FileList";
 import "./drive.css";
-import { setCurrentDir, setPopupDisplay } from "../../reducers/fileReducer";
+import {
+  setCurrentDir,
+  setFileView,
+  setPopupDisplay,
+} from "../../reducers/fileReducer";
 import PopUp from "./PopUp";
+import Uploader from "./uploader/Uploader";
 
 const Drive = () => {
   const dispatch = useDispatch();
   const currentDir = useSelector((state) => state.files.currentDir);
+  const loader = useSelector((state) => state.app.loader);
   const dirStack = useSelector((state) => state.files.dirStack);
   const [dragEnter, setDragEnter] = useState(false);
+  const [sort, setSort] = useState("type");
 
   useEffect(() => {
-    dispatch(getFiles(currentDir));
-  }, [currentDir]);
+    dispatch(getFiles(currentDir, sort));
+  }, [currentDir, sort]);
 
   function showPopupHandler() {
     dispatch(setPopupDisplay("flex"));
@@ -50,6 +57,14 @@ const Drive = () => {
     setDragEnter(false);
   }
 
+  if (loader) {
+    return (
+      <div className="loader">
+        <div className="lds-dual-ring"></div>
+      </div>
+    );
+  }
+
   return !dragEnter ? (
     <div
       className="drive"
@@ -76,9 +91,27 @@ const Drive = () => {
             className="drive__upload-input"
           />
         </div>
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="drive__select"
+        >
+          <option value="name">By name</option>
+          <option value="type">By type</option>
+          <option value="date">By date</option>
+        </select>
+        <button
+          className="drive__plate"
+          onClick={() => dispatch(setFileView("plate"))}
+        />
+        <button
+          className="drive__list"
+          onClick={() => dispatch(setFileView("list"))}
+        />
       </div>
       <FileList />
       <PopUp />
+      <Uploader />
     </div>
   ) : (
     <div
@@ -88,7 +121,7 @@ const Drive = () => {
       onDragLeave={dragLeaveHandler}
       onDragOver={dragEnterHandler}
     >
-      Drop files here
+      Перетащите файлы сюда
     </div>
   );
 };

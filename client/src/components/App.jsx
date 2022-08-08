@@ -12,6 +12,7 @@ import Login from "./authorization/Login";
 import { auth } from "../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import Drive from "./drive/Drive";
+import Profile from "./profile/Profile";
 
 function App() {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -35,6 +36,7 @@ function App() {
           ) : (
             <Routes>
               <Route exact path="/" element={<Drive />} />
+              <Route exact path="/profile" element={<Profile />} />
               <Route path="/login" element={<Navigate replace to="/" />} />
             </Routes>
           )}

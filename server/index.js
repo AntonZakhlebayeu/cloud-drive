@@ -10,6 +10,7 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
+app.use(express.static("static"));
 app.use(fileUpload({}));
 app.use(corsMiddleware);
 app.use(express.json());
