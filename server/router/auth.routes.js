@@ -44,6 +44,7 @@ module.exports = router;
  *   post:
  *     summary: Register a user
  *     tags: [auth]
+ *     security: []
  *     requestBody:
  *       required: true
  *       content:
