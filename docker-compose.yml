@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: npm run start
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - mongo
+
+  client:
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    command: npm run start
+    ports:
+      - '3000:3000'
+    volumes:
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - mongo
+      - api
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
