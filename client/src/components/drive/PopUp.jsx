@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Input from "../../utils/input/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { setPopupDisplay } from "../../reducers/fileReducer";
