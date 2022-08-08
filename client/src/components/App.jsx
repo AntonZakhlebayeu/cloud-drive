@@ -35,6 +35,7 @@ function App() {
           ) : (
             <Routes>
               <Route exact path="/" element={<Drive />} />
+              <Route path="/login" element={<Navigate replace to="/" />} />
             </Routes>
           )}
         </div>
