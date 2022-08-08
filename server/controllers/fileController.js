@@ -20,7 +20,7 @@ class FileController {
         await parentFile.save();
       }
       await file.save();
-      return res.json(file);
+      return res.status(201).json(file);
     } catch (e) {
       console.log(e);
       return res.status(400).json(e);
@@ -57,7 +57,7 @@ class FileController {
           });
           break;
       }
-      return res.json(files);
+      return res.status(200).json(files);
     } catch (e) {
       console.log(e);
       return res.status(500).json({ message: "Can not get files" });
@@ -88,7 +88,7 @@ class FileController {
       }
 
       if (fs.existsSync(path)) {
-        return res.status(400).json({ message: "File already exist" });
+        return res.status(500).json({ message: "File already exist" });
       }
       await file.mv(path);
 
@@ -109,7 +109,7 @@ class FileController {
       await dbFile.save();
       await user.save();
 
-      res.json(dbFile);
+      res.status(201).json(dbFile);
     } catch (e) {
       console.log(e);
       return res.status(500).json({ message: "Upload error" });
@@ -138,7 +138,7 @@ class FileController {
       }
       fileService.deleteFile(file);
       await file.remove();
-      return res.json({ message: "File was deleted" });
+      return res.status(204).json({ message: "File was deleted" });
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: "Dir is not empty" });
@@ -150,7 +150,7 @@ class FileController {
       const searchName = req.query.search;
       let files = await File.find({ user: req.user.id });
       files = files.filter((file) => file.name.includes(searchName));
-      return res.json(files);
+      return res.status(200).json(files);
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: "Search error" });
@@ -165,7 +165,7 @@ class FileController {
       await file.mv(process.env.STATIC_PATH + "//" + avatarName);
       user.avatar = avatarName;
       await user.save();
-      return res.json({ message: "Avatar was uploaded" });
+      return res.status(201).json({ message: "Avatar was uploaded" });
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: "Upload avatar error" });
@@ -178,7 +178,7 @@ class FileController {
       fs.unlinkSync(process.env.STATIC_PATH + "//" + user.avatar);
       user.avatar = null;
       await user.save();
-      return res.json(user);
+      return res.status(204).json(user);
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: "Delete avatar error" });

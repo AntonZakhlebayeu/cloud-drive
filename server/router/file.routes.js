@@ -101,6 +101,10 @@ module.exports = router;
  *                 items:
  *                   type: string
  *                   format: binary
+ *               parent:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     responses:
  *       201:
  *         description: The authorization succeeded

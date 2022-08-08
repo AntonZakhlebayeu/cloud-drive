@@ -8,21 +8,21 @@ Express.js is used as a backend framework. React + Redux is used as a frontend f
 
 To start the project, you need to install node, in the server and client directories, write the command
 
-`````````console
+```console
 npm install
-`````````
+```
 
 Then, in order to run the project locally, you need to configure the .env config in the server directory. It stores settings for jwt, mongo, files folder and static folder. And then write the command in the console. The project has the concurrently module installed, which will simultaneously launch both the client and the server.
 
-`````````console
+```console
 npm start
-`````````
+```
 
 Or via docker. Then you need to install docker and write the command in the root directory
 
-`````````console
+```console
 docker-compose-up
-`````````
+```
 
 The API is documented via swagger. It is available at:
 http://localhost:8000/api-docs
