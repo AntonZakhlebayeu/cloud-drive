@@ -10,3 +10,33 @@ const User = new Schema({
 });
 
 module.exports = model("User", User);
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The auto-generated id of the book
+ *         email:
+ *           type: string
+ *           description: The user's email
+ *         diskSpace:
+ *           type: Number
+ *           description: How much disk space has user
+ *         usedSpace:
+ *           type: Number
+ *           description: How many user used space
+ *         avatar:
+ *           type: string
+ *           description: The user's avatar
+ *         files:
+ *           type: ObjectId
+ *           description: The file _id which user owns
+ */

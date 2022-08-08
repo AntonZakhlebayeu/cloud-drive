@@ -30,3 +30,117 @@ router.post("/login", [
 router.get("/auth", authMiddleware, userController.auth);
 
 module.exports = router;
+
+/**
+ * @swagger
+ * tags:
+ *   name: auth
+ *   description: The authorization routes
+ */
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a user
+ *     tags: [auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: The registration completed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       400:
+ *         description: The registration failed
+ */
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Login a user
+ *     tags: [auth]
+ *     security: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: The registration completed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     email:
+ *                       type: string
+ *                     diskSpace:
+ *                       type: number
+ *                     usedSpace:
+ *                       type: number
+ *       400:
+ *         description: The registration failed
+ */
+
+/**
+ * @swagger
+ * /auth/auth:
+ *   get:
+ *     summary: Return a user
+ *     tags: [auth]
+ *     responses:
+ *       200:
+ *         description: The authentication completed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     email:
+ *                       type: string
+ *                     diskSpace:
+ *                       type: number
+ *                     usedSpace:
+ *                       type: number
+ *               security:
+ *                 jwt: []
+ *       401:
+ *         description: Unauthorized
+ */
