@@ -12,7 +12,7 @@ To start the project, you need to install node, in the server and client directo
 npm install
 `````````
 
-Then, in order to run the project locally, you need to configure the .env config in the server directory. It stores settings for jwt, mongo, files folder and static folder. And then write the command in the console.
+Then, in order to run the project locally, you need to configure the .env config in the server directory. It stores settings for jwt, mongo, files folder and static folder. And then write the command in the console. The project has the concurrently module installed, which will simultaneously launch both the client and the server.
 
 `````````console
 npm start
